@@ -99,3 +99,5 @@ AzureCommunicationUI/.idea
 AzureCommunicationUI/AzureCommunicationUIDemoApp/Sources/EnvConfig.xcconfig
 AzureCommunicationUI/AzureCommunicationUIDemoApp/EnvConfig.xcconfig
 AzureCommunicationUI/sdk/AzureCommunicationUICalling/.jazzy.yaml
+*.pbxproj
+*.pbxproj
