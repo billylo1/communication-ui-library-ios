@@ -360,6 +360,18 @@ class CallingDemoViewController: UIViewController {
             self.onCallStateChanged(callStateEvent,
                     callComposite: composite)
         }
+        
+        let onCaptionsReceivedHandler: (CallCompositeCaptionsData) -> Void = { [weak callComposite] captionData in
+            guard let composite = callComposite else {
+                return
+            }
+            let data = captionData.spokenText
+            print("onCaptionsReceivedHandler trigger \(data)")
+
+        }
+
+        
+        
         let onDismissedHandler: (CallCompositeDismissed) -> Void = { [] _ in
             if self.envConfigSubject.useRelaunchOnDismissedToggle && self.exitCompositeExecuted {
                             DispatchQueue.main.async {
@@ -405,12 +417,14 @@ class CallingDemoViewController: UIViewController {
         callComposite.events.onRemoteParticipantJoined = onRemoteParticipantJoinedHandler
         callComposite.events.onError = onErrorHandler
         callComposite.events.onCallStateChanged = onCallStateChangedHandler
+        callComposite.events.onCaptionsReceived = onCaptionsReceivedHandler         // added
         callComposite.events.onDismissed = onDismissedHandler
         callComposite.events.onPictureInPictureChanged = onPipChangedHandler
         callComposite.events.onUserReportedIssue = onUserReportedIssueHandler
         callComposite.events.onIncomingCallAcceptedFromCallKit = callKitCallAccepted
         callComposite.events.onIncomingCall = onIncomingCall
         callComposite.events.onIncomingCallCancelled = onIncomingCallCancelled
+        
         
     }
 
@@ -440,6 +454,7 @@ class CallingDemoViewController: UIViewController {
         let callScreenOptions = createCallScreenOptions(callComposite: callComposite)
         
         let captionsOptions = CaptionsOptions(captionsOn: true, spokenLanguage: "en-US")
+        
         return LocalOptions(participantViewData: participantViewData,
                                         setupScreenViewData: setupScreenViewData,
                                         cameraOn: envConfigSubject.cameraOn,

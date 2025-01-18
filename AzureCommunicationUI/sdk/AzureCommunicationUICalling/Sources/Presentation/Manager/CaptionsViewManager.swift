@@ -11,14 +11,16 @@ class CaptionsViewManager: ObservableObject {
     var isTranslationEnabled = false
     private let callingSDKWrapper: CallingSDKWrapperProtocol
     private let store: Store<AppState, Action>
+    private let eventsHandler: CallComposite.Events
     @Published var captionData = [CallCompositeCaptionsData]()
     private var subscriptions = Set<AnyCancellable>()
     private let maxCaptionsCount = 50
     private let finalizationDelay: TimeInterval = 5 // seconds
 
-    init(store: Store<AppState, Action>, callingSDKWrapper: CallingSDKWrapperProtocol) {
+    init(store: Store<AppState, Action>, callingSDKWrapper: CallingSDKWrapperProtocol, callCompositeEventsHandler: CallComposite.Events) {
         self.callingSDKWrapper = callingSDKWrapper
         self.store = store
+        self.eventsHandler = callCompositeEventsHandler
         subscribeToCaptions()
     }
 
@@ -46,6 +48,10 @@ class CaptionsViewManager: ObservableObject {
         }
 
         self.processNewCaption(newCaption: newData)
+        guard let onCaptionsReceived = eventsHandler.onCaptionsReceived else {
+            return
+        }
+        onCaptionsReceived(newData)
     }
 
     private func processNewCaption(newCaption: CallCompositeCaptionsData) {

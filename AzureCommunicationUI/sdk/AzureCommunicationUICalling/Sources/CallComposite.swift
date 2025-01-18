@@ -30,7 +30,7 @@ public class CallComposite {
         /// Closure to execute when call state changes.
         public var onCallStateChanged: ((CallState) -> Void)?
         /// Closure to Call Composite dismissed.
-        public var onCaptionsReceived: ((CommunicationCaptions) -> Void)?
+        var onCaptionsReceived: ((CallCompositeCaptionsData) -> Void)?                  // added
         /// Closure to Call Composite dismissed.
         public var onDismissed: ((CallCompositeDismissed) -> Void)?
         /// Closure to execute when the User reports an issue from within the call composite
@@ -611,8 +611,10 @@ and launch(locator: JoinLocator, localOptions: LocalOptions? = nil) instead.
 
         let captionsViewManager = CaptionsViewManager(
             store: store,
-            callingSDKWrapper: callingSdkWrapper
+            callingSDKWrapper: callingSdkWrapper,
+            callCompositeEventsHandler: callCompositeEventsHandler
         )
+        
         return CompositeViewFactory(
             logger: logger,
             avatarManager: avatarViewManager,
