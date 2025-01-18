@@ -14,7 +14,7 @@ public struct LocalOptions {
     /// Configuration for the call setup screen, including titles and subtitles.
     let setupScreenViewData: SetupScreenViewData?
     /// Configuration for captions
-    let captionsOptions: CaptionsOptions?
+    var captionsOptions: CaptionsOptions?
 
     ///  The CameraOn is used when we skip the setup screen
 

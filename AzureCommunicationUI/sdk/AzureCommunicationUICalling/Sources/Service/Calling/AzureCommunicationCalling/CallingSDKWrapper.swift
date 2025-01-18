@@ -93,25 +93,25 @@ class CallingSDKWrapper: NSObject, CallingSDKWrapperProtocol {
 
         joinCallOptions.outgoingAudioOptions = OutgoingAudioOptions()
         // joinCallOptions.outgoingAudioOptions?.muted = !isAudioPreferred
-        let outgoingAudioStreamOptions = RawOutgoingAudioStreamOptions()
-        let propertiesOut = RawOutgoingAudioStreamProperties()
-        propertiesOut.sampleRate = .hz44100
-        propertiesOut.bufferDuration = .ms10
-        propertiesOut.channelMode = .mono
-        propertiesOut.format = .pcm16Bit
-        outgoingAudioStreamOptions.properties = propertiesOut
-
-        self.rawOutgoingAudioStream = RawOutgoingAudioStream(options: outgoingAudioStreamOptions)
-        
-        self.delegateImplementer = DelegateImplementer()
-        self.delegateImplementer?.rawOutgoingAudioSender = RawOutgoingAudioSender(
-            stream: self.rawOutgoingAudioStream!,
-            options: outgoingAudioStreamOptions,
-            producer: ToneSampleProducer())
-        
-        self.rawOutgoingAudioStream?.delegate = self.delegateImplementer
-
-        joinCallOptions.outgoingAudioOptions?.stream = self.rawOutgoingAudioStream
+//        let outgoingAudioStreamOptions = RawOutgoingAudioStreamOptions()
+//        let propertiesOut = RawOutgoingAudioStreamProperties()
+//        propertiesOut.sampleRate = .hz44100
+//        propertiesOut.bufferDuration = .ms10
+//        propertiesOut.channelMode = .mono
+//        propertiesOut.format = .pcm16Bit
+//        outgoingAudioStreamOptions.properties = propertiesOut
+//
+//        self.rawOutgoingAudioStream = RawOutgoingAudioStream(options: outgoingAudioStreamOptions)
+//        
+//        self.delegateImplementer = DelegateImplementer()
+//        self.delegateImplementer?.rawOutgoingAudioSender = RawOutgoingAudioSender(
+//            stream: self.rawOutgoingAudioStream!,
+//            options: outgoingAudioStreamOptions,
+//            producer: ToneSampleProducer())
+//        
+//        self.rawOutgoingAudioStream?.delegate = self.delegateImplementer
+//
+//        joinCallOptions.outgoingAudioOptions?.stream = self.rawOutgoingAudioStream
 
         joinCallOptions.incomingVideoOptions = incomingVideoOptions
         if let remoteInfo = callKitRemoteInfo {

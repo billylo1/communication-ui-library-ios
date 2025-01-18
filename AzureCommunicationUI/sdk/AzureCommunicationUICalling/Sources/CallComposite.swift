@@ -4,9 +4,7 @@
 //
 
 import AzureCommunicationCommon
-/* <SDK_CX_PROVIDER_SUPPORT>
 import AzureCommunicationCalling
-</SDK_CX_PROVIDER_SUPPORT> */
 
 import UIKit
 import SwiftUI
@@ -31,6 +29,8 @@ public class CallComposite {
         public var onPictureInPictureChanged: ((_ isPictureInPicture: Bool) -> Void)?
         /// Closure to execute when call state changes.
         public var onCallStateChanged: ((CallState) -> Void)?
+        /// Closure to Call Composite dismissed.
+        public var onCaptionsReceived: ((CommunicationCaptions) -> Void)?
         /// Closure to Call Composite dismissed.
         public var onDismissed: ((CallCompositeDismissed) -> Void)?
         /// Closure to execute when the User reports an issue from within the call composite
