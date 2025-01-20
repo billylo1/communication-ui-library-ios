@@ -15,7 +15,7 @@ class CaptionsViewManagerTests: XCTestCase {
         super.setUp()
         mockCallingSDKWrapper = CallingSDKWrapperMocking()
         mockStore = StoreFactoryMocking()
-        captionsManager = CaptionsViewManager(store: mockStore.store, callingSDKWrapper: mockCallingSDKWrapper)
+        captionsManager = CaptionsViewManager(store: mockStore.store, callingSDKWrapper: mockCallingSDKWrapper, callCompositeEventsHandler: CallComposite.Events())
     }
 
     override func tearDown() {

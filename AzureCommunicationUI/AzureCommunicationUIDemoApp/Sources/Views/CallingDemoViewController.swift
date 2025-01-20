@@ -453,7 +453,7 @@ class CallingDemoViewController: UIViewController {
 
         let callScreenOptions = createCallScreenOptions(callComposite: callComposite)
         
-        let captionsOptions = CaptionsOptions(captionsOn: true, spokenLanguage: "en-US")
+        let captionsOptions = CaptionsOptions(captionsOn: true, spokenLanguage: "ja-jp")
         
         return LocalOptions(participantViewData: participantViewData,
                                         setupScreenViewData: setupScreenViewData,
