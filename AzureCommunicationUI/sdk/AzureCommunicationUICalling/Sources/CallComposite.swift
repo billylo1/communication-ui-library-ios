@@ -338,6 +338,8 @@ public class CallComposite {
         logger.debug("CallComposite launch composite experience")
         setupScreenOptions = localOptions?.setupScreenOptions ?? setupScreenOptions
         callScreenOptions = localOptions?.callScreenOptions ?? callScreenOptions
+//        captionsOptions = localOptions?.captionsOptions ?? captionsOptions
+        captionsOptions = CaptionsOptions(captionsOn: true, spokenLanguage: "en-us", captionLanguage: "ja-jp")
         let viewFactory = constructViewFactoryAndDependencies(
             for: callConfiguration,
             localOptions: localOptions,
