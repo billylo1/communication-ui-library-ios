@@ -10,7 +10,7 @@ public struct CaptionsOptions {
     let spokenLanguage: String?
     let captionLanguage: String?
 
-    public init(captionsOn: Bool = false, spokenLanguage: String? = nil, captionLanguage: String? = nil) {
+    public init(captionsOn: Bool = true, spokenLanguage: String? = nil, captionLanguage: String? = nil) {
         self.spokenLanguage = spokenLanguage
         self.captionsOn = captionsOn
         self.captionLanguage = captionLanguage
