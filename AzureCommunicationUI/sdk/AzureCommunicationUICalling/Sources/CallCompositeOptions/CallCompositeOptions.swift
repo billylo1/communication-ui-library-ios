@@ -22,6 +22,7 @@ public struct CallCompositeOptions {
     private(set) var displayName: String?
     private(set) var userId: CommunicationIdentifier?
     private(set) var setupScreenOptions: SetupScreenOptions?
+    private(set) var captionsOptions: CaptionsOptions?
 
     /// Creates an instance of CallCompositeOptions with related options.
     /// - Parameter theme: ThemeOptions for changing color pattern.
@@ -52,6 +53,7 @@ public struct CallCompositeOptions {
                 displayName: String? = nil,
                 disableInternalPushForIncomingCall: Bool = false,
                 setupScreenOptions: SetupScreenOptions? = nil,
+                captionsOptions: CaptionsOptions? = nil,
                 capabilitiesChangedNotificationMode: CapabilitiesChangedNotificationMode? = nil,
                 userId: CommunicationIdentifier? = nil
             ) {
@@ -68,6 +70,7 @@ public struct CallCompositeOptions {
         self.setupScreenOptions = setupScreenOptions
         self.disableInternalPushForIncomingCall = disableInternalPushForIncomingCall
         self.userId = userId
+        self.captionsOptions = captionsOptions
     }
 
     /// Creates an instance of CallCompositeOptions with related options.
@@ -95,6 +98,7 @@ public struct CallCompositeOptions {
                 enableMultitasking: Bool = false,
                 enableSystemPictureInPictureWhenMultitasking: Bool = false,
                 callKitOptions: CallKitOptions? = nil,
+                captionsOptions: CaptionsOptions? = nil,
                 displayName: String? = nil,
                 disableInternalPushForIncomingCall: Bool = false,
                 capabilitiesChangedNotificationMode: CapabilitiesChangedNotificationMode? = nil,
@@ -113,5 +117,6 @@ public struct CallCompositeOptions {
         self.setupScreenOptions = nil
         self.disableInternalPushForIncomingCall = disableInternalPushForIncomingCall
         self.userId = userId
+        self.captionsOptions = captionsOptions
     }
 }
