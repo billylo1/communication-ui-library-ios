@@ -22,6 +22,7 @@ public class CallComposite {
     /// The class to configure events closures for Call Composite.
     public class Events {
         /// Closure to execute when error event occurs inside Call Composite.
+        public var captionLanguage : String?                                       // added
         public var onError: ((CallCompositeError) -> Void)?
         /// Closures to execute when participant has joined a call inside Call Composite.
         public var onRemoteParticipantJoined: (([CommunicationIdentifier]) -> Void)?
@@ -559,9 +560,10 @@ and launch(locator: JoinLocator, localOptions: LocalOptions? = nil) instead.
             callingSDKInitializer: getCallingSDKInitializer())
         self.callingSDKWrapper = callingSdkWrapper
 
+        let callingService = CallingService(logger: logger, callingSDKWrapper: callingSdkWrapper)   // modified so we can set caption language
         let store = Store.constructStore(
             logger: logger,
-            callingService: CallingService(logger: logger, callingSDKWrapper: callingSdkWrapper),
+            callingService: callingService,
             displayName: localOptions?.participantViewData?.displayName ?? displayName,
             startWithCameraOn: localOptions?.cameraOn,
             startWithMicrophoneOn: localOptions?.microphoneOn,

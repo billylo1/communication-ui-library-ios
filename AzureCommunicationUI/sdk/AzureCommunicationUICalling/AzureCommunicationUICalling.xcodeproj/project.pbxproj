@@ -332,6 +332,7 @@
 		B2F079672AC6262100E9AA9E /* CallDiagnosticsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F079662AC6262100E9AA9E /* CallDiagnosticsReducerTests.swift */; };
 		BD3CC699283D952E0052DE4A /* OverlayViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CC698283D952E0052DE4A /* OverlayViewModelProtocol.swift */; };
 		BD3CC69B283D953E0052DE4A /* OnHoldOverlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CC69A283D953E0052DE4A /* OnHoldOverlayViewModel.swift */; };
+		BD58AFBF2D3F4431006DE639 /* TranslatorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD58AFBE2D3F4431006DE639 /* TranslatorUtil.swift */; };
 		BD750B902D35C76300C014CB /* RawOutgoingAudioSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD750B8F2D35C75C00C014CB /* RawOutgoingAudioSender.swift */; };
 		C868F7732C5AEE1800D242B4 /* CallScreenHeaderViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868F7722C5AEE1800D242B4 /* CallScreenHeaderViewData.swift */; };
 		C89FCE602C0FAF5D00983444 /* CapabilitiesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89FCE5F2C0FAF5D00983444 /* CapabilitiesManager.swift */; };
@@ -760,6 +761,7 @@
 		B75F3B6936323E60658040C6 /* Pods-AzureCommunicationUICalling.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AzureCommunicationUICalling.debug.xcconfig"; path = "Target Support Files/Pods-AzureCommunicationUICalling/Pods-AzureCommunicationUICalling.debug.xcconfig"; sourceTree = "<group>"; };
 		BD3CC698283D952E0052DE4A /* OverlayViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayViewModelProtocol.swift; sourceTree = "<group>"; };
 		BD3CC69A283D953E0052DE4A /* OnHoldOverlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnHoldOverlayViewModel.swift; sourceTree = "<group>"; };
+		BD58AFBE2D3F4431006DE639 /* TranslatorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorUtil.swift; sourceTree = "<group>"; };
 		BD750B8F2D35C75C00C014CB /* RawOutgoingAudioSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawOutgoingAudioSender.swift; sourceTree = "<group>"; };
 		C580DBF67D8B5AEF7A801F90 /* Pods_AzureCommunicationUICalling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AzureCommunicationUICalling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C868F7722C5AEE1800D242B4 /* CallScreenHeaderViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallScreenHeaderViewData.swift; sourceTree = "<group>"; };
@@ -1140,6 +1142,7 @@
 		1F6470AA2639FE560008B9E9 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				BD58AFBE2D3F4431006DE639 /* TranslatorUtil.swift */,
 				50B6AC7E28208C750077FC01 /* AccessibilityIdentifier.swift */,
 				1FE1BE7E26FE38C9000A8D18 /* CallCompositeInternalError.swift */,
 				1FC30845266949E8007EC537 /* ColorExtension.swift */,
@@ -2364,6 +2367,7 @@
 				500C0F1F2847DE18000BA2DC /* RemoteOptions.swift in Sources */,
 				759BDEFF28FF0B0B002B6853 /* LocalizationProvider.swift in Sources */,
 				A4DBCEBF2BFB9DA800332E7B /* CallingSDKInitializer.swift in Sources */,
+				BD58AFBF2D3F4431006DE639 /* TranslatorUtil.swift in Sources */,
 				1F13D36C26A8B83300E31666 /* RemoteParticipantsState.swift in Sources */,
 				53F9FB872C387F8E009941FA /* ParticipantMenuView.swift in Sources */,
 				5A1F4BCD2BD9756D00EA7B2D /* LeaveCallConfirmationMode.swift in Sources */,

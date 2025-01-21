@@ -295,6 +295,7 @@ class CallingDemoViewController: UIViewController {
             subscribeToEvents(callComposite: callComposite)
             GlobalCompositeManager.callComposite = callComposite
             self.envConfigSubject.saveFromState()
+            callComposite.events.captionLanguage = "fr-fr"
             return callComposite
         }
         return nil
@@ -366,7 +367,7 @@ class CallingDemoViewController: UIViewController {
                 return
             }
             let data = captionData.spokenText
-            print("onCaptionsReceivedHandler trigger \(data)")
+            print("onCaptionsReceivedHandler trigger \(captionData.spokenText) \(captionData.captionText ?? "")")
 
         }
 
