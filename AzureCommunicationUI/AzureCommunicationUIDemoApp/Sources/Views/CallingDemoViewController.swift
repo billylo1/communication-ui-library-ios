@@ -295,7 +295,7 @@ class CallingDemoViewController: UIViewController {
             subscribeToEvents(callComposite: callComposite)
             GlobalCompositeManager.callComposite = callComposite
             self.envConfigSubject.saveFromState()
-            callComposite.events.captionLanguage = "fr-fr"
+            callComposite.events.captionLanguage = "ja-jp"
             return callComposite
         }
         return nil

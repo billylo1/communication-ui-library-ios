@@ -85,8 +85,11 @@ public class CallComposite {
     private var leaveCallConfirmationMode: LeaveCallConfirmationMode = .alwaysEnabled
     private var setupScreenOptions: SetupScreenOptions?
     private var callScreenOptions: CallScreenOptions?
-    
-    private var captionsOptions: CaptionsOptions?                       // added
+
+    // added
+    private var captionsOn: Bool = true
+    private var spokenLanguage: String?
+    private var captionLanguage: String?
     
     private var viewFactory: CompositeViewFactoryProtocol?
     private var viewController: UIViewController?
@@ -141,7 +144,7 @@ public class CallComposite {
         callScreenOptions = options?.callScreenOptions
         callKitOptions = options?.callKitOptions
         displayName = options?.displayName
-        captionsOptions = options?.captionsOptions              // added
+        
         if let disableInternalPushForIncomingCall = options?.disableInternalPushForIncomingCall {
             self.disableInternalPushForIncomingCall = disableInternalPushForIncomingCall
         }
@@ -168,7 +171,6 @@ public class CallComposite {
         setupScreenOptions = options?.setupScreenOptions
         callScreenOptions = options?.callScreenOptions
         callKitOptions = options?.callKitOptions
-        captionsOptions = options?.captionsOptions              // added
         displayName = options?.displayName
         if let disableInternalPushForIncomingCall = options?.disableInternalPushForIncomingCall {
             self.disableInternalPushForIncomingCall = disableInternalPushForIncomingCall
@@ -338,8 +340,6 @@ public class CallComposite {
         logger.debug("CallComposite launch composite experience")
         setupScreenOptions = localOptions?.setupScreenOptions ?? setupScreenOptions
         callScreenOptions = localOptions?.callScreenOptions ?? callScreenOptions
-//        captionsOptions = localOptions?.captionsOptions ?? captionsOptions
-        captionsOptions = CaptionsOptions(captionsOn: true, spokenLanguage: "en-us", captionLanguage: "ja-jp")
         let viewFactory = constructViewFactoryAndDependencies(
             for: callConfiguration,
             localOptions: localOptions,
