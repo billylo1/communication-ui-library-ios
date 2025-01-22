@@ -86,11 +86,6 @@ public class CallComposite {
     private var setupScreenOptions: SetupScreenOptions?
     private var callScreenOptions: CallScreenOptions?
 
-    // added
-    private var captionsOn: Bool = true
-    private var spokenLanguage: String?
-    private var captionLanguage: String?
-    
     private var viewFactory: CompositeViewFactoryProtocol?
     private var viewController: UIViewController?
     private var pipViewController: UIViewController?

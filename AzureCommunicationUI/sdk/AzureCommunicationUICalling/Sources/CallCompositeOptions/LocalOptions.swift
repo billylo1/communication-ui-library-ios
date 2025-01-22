@@ -18,9 +18,7 @@ public struct LocalOptions {
 
     /// Determines if the microphone is enabled upon joining the call, bypassing the setup screen.
     let microphoneOn: Bool?
-    let captionsOn: Bool
-    let spokenLanguage: String?
-    let captionLanguage: String?
+    let captionsOptions: CaptionsOptions?
     
     /// Indicates whether to skip the setup screen and use default or specified settings.
     let skipSetupScreen: Bool?
@@ -50,11 +48,8 @@ public struct LocalOptions {
                 microphoneOn: Bool? = false,
                 skipSetupScreen: Bool? = false,
                 audioVideoMode: CallCompositeAudioVideoMode = .audioAndVideo,
-                captionsOptions: CaptionsOptions? = nil,
                 setupScreenOptions: SetupScreenOptions? = nil,
-                captionsOn: Bool = true,
-                spokenLanguage: String? = nil,
-                captionLanguage: String? = nil,
+                captionsOptions: CaptionsOptions? = nil,
                 callScreenOptions: CallScreenOptions? = nil) {
         self.participantViewData = participantViewData
         self.setupScreenViewData = setupScreenViewData
@@ -64,9 +59,7 @@ public struct LocalOptions {
         self.audioVideoMode = audioVideoMode
         self.setupScreenOptions = setupScreenOptions
         self.callScreenOptions = callScreenOptions
-        self.captionsOn = captionsOn
-        self.spokenLanguage = spokenLanguage
-        self.captionLanguage = captionLanguage
+        self.captionsOptions = captionsOptions
     }
 
     /// Determines the actual state of the camera

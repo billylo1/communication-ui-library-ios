@@ -122,7 +122,6 @@ class CompositeViewModelFactory: CompositeViewModelFactoryProtocol {
 
     func getCallingViewModel(rendererViewManager: RendererViewManager) -> CallingViewModel {
         guard let viewModel = self.callingViewModel else {
-            let captionsOptions = CaptionsOptions(captionsOn: true, spokenLanguage: "en-us", captionLanguage: "ja-jp")   // REMINDER ?? what to do with this
             let viewModel = CallingViewModel(compositeViewModelFactory: self,
                                              store: store,
                                              localizationProvider: localizationProvider,
@@ -131,7 +130,7 @@ class CompositeViewModelFactory: CompositeViewModelFactoryProtocol {
                                              allowLocalCameraPreview: localOptions?.audioVideoMode
                                                 != CallCompositeAudioVideoMode.audioOnly,
                                              callType: callType,
-                                             captionsOptions: captionsOptions,
+                                             captionsOptions: (localOptions?.captionsOptions)!,
                                              capabilitiesManager: self.capabilitiesManager,
                                              callScreenOptions: callScreenOptions ?? CallScreenOptions(),
                                              rendererViewManager: rendererViewManager)

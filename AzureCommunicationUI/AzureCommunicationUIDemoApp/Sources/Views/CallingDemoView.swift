@@ -663,7 +663,6 @@ extension CallingDemoView {
                             microphoneOn: envConfigSubject.microphoneOn,
                             skipSetupScreen: envConfigSubject.skipSetupScreen,
                             audioVideoMode: envConfigSubject.audioOnly ? .audioOnly : .audioAndVideo,
-                            captionsOptions: captionsOptions,
                             setupScreenOptions: setupScreenOptions,
                             callScreenOptions: callScreenOptions
         )

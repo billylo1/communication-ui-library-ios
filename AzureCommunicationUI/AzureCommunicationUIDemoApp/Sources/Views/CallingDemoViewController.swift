@@ -295,7 +295,7 @@ class CallingDemoViewController: UIViewController {
             subscribeToEvents(callComposite: callComposite)
             GlobalCompositeManager.callComposite = callComposite
             self.envConfigSubject.saveFromState()
-            callComposite.events.captionLanguage = "ja-jp"
+            callComposite.events.captionLanguage = "ja-JP"
             return callComposite
         }
         return nil
@@ -454,7 +454,7 @@ class CallingDemoViewController: UIViewController {
 
         let callScreenOptions = createCallScreenOptions(callComposite: callComposite)
         
-        let captionsOptions = CaptionsOptions(captionsOn: true, spokenLanguage: "ja-jp", captionLanguage: "en-us")
+        let captionsOptions = CaptionsOptions(captionsOn: false, spokenLanguage: "en-us", captionLanguage: "ja-JP")
         
         return LocalOptions(participantViewData: participantViewData,
                                         setupScreenViewData: setupScreenViewData,
@@ -462,8 +462,8 @@ class CallingDemoViewController: UIViewController {
                                         microphoneOn: envConfigSubject.microphoneOn,
                                         skipSetupScreen: envConfigSubject.skipSetupScreen,
                                         audioVideoMode: envConfigSubject.audioOnly ? .audioOnly : .audioAndVideo,
-                                        captionsOptions: captionsOptions,
                             setupScreenOptions: setupScreenOptions,
+                            captionsOptions: captionsOptions,
                             callScreenOptions: callScreenOptions
         )
     }

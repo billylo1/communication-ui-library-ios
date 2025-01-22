@@ -60,7 +60,7 @@ class CaptionsViewManager: ObservableObject {
             var translatedCaption: CallCompositeCaptionsData = newCaption
             let shouldTranslate = (lastTranslation == nil || newCaption.resultType == .final || Date().timeIntervalSince(lastTranslation!) > 2)
             if shouldTranslate {
-                let translatedText = await TranslatorUtil.translate(inputText: newCaption.spokenText, fromLocale: newCaption.spokenLanguage, toLocale: self.eventsHandler.captionLanguage ?? "en-us")
+                let translatedText = await TranslatorUtil.translate(inputText: newCaption.spokenText, fromLocale: newCaption.spokenLanguage, toLocale: self.eventsHandler.captionLanguage ?? "ja-JP")
                 if !translatedText.isEmpty {
                     print(translatedText)
                     translatedCaption = CallCompositeCaptionsData(

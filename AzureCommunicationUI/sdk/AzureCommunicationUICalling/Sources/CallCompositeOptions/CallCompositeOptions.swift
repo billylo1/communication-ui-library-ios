@@ -22,9 +22,6 @@ public struct CallCompositeOptions {
     private(set) var displayName: String?
     private(set) var userId: CommunicationIdentifier?
     private(set) var setupScreenOptions: SetupScreenOptions?
-    private(set) var captionsOn: Bool = true
-    private(set) var spokenLanguage: String?
-    private(set) var captionLanguage: String?
 
     /// Creates an instance of CallCompositeOptions with related options.
     /// - Parameter theme: ThemeOptions for changing color pattern.
@@ -57,9 +54,6 @@ public struct CallCompositeOptions {
                 setupScreenOptions: SetupScreenOptions? = nil,
                 captionsOptions: CaptionsOptions? = nil,
                 capabilitiesChangedNotificationMode: CapabilitiesChangedNotificationMode? = nil,
-                captionsOn: Bool = true,
-                spokenLanguage: String? = nil,
-                captionLanguage: String? = nil,
                 userId: CommunicationIdentifier? = nil
             ) {
         self.themeOptions = theme
@@ -75,9 +69,6 @@ public struct CallCompositeOptions {
         self.setupScreenOptions = setupScreenOptions
         self.disableInternalPushForIncomingCall = disableInternalPushForIncomingCall
         self.userId = userId
-        self.spokenLanguage = spokenLanguage
-        self.captionLanguage = captionLanguage
-        self.captionsOn = captionsOn
     }
 
     /// Creates an instance of CallCompositeOptions with related options.
@@ -105,9 +96,6 @@ public struct CallCompositeOptions {
                 enableMultitasking: Bool = false,
                 enableSystemPictureInPictureWhenMultitasking: Bool = false,
                 callKitOptions: CallKitOptions? = nil,
-                captionsOn: Bool = true,
-                spokenLanguage: String? = nil,
-                captionLanguage: String? = nil,
                 displayName: String? = nil,
                 disableInternalPushForIncomingCall: Bool = false,
                 capabilitiesChangedNotificationMode: CapabilitiesChangedNotificationMode? = nil,
@@ -126,8 +114,5 @@ public struct CallCompositeOptions {
         self.setupScreenOptions = nil
         self.disableInternalPushForIncomingCall = disableInternalPushForIncomingCall
         self.userId = userId
-        self.captionsOn = captionsOn
-        self.spokenLanguage = spokenLanguage
-        self.captionLanguage = captionLanguage
     }
 }
