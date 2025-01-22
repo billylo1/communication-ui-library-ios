@@ -28,6 +28,8 @@ class CompositeViewModelFactory: CompositeViewModelFactoryProtocol {
     private weak var callingViewModel: CallingViewModel?
     private let setupScreenOptions: SetupScreenOptions?
     private let callScreenOptions: CallScreenOptions?
+    private let captionsOptions: CaptionsOptions?
+
     private let callType: CompositeCallType
     /* <CUSTOM_COLOR_FEATURE> */
     private let themeOptions: ThemeOptions
@@ -50,6 +52,7 @@ class CompositeViewModelFactory: CompositeViewModelFactoryProtocol {
          callType: CompositeCallType,
          setupScreenOptions: SetupScreenOptions?,
          callScreenOptions: CallScreenOptions?,
+         captionsOptions: CaptionsOptions?,
          capabilitiesManager: CapabilitiesManager,
          avatarManager: AvatarViewManagerProtocol,
          /* <CUSTOM_COLOR_FEATURE> */
@@ -73,6 +76,7 @@ class CompositeViewModelFactory: CompositeViewModelFactoryProtocol {
         self.retrieveLogFiles = retrieveLogFiles
         self.setupScreenOptions = setupScreenOptions
         self.callScreenOptions = callScreenOptions
+        self.captionsOptions = captionsOptions
         self.capabilitiesManager = capabilitiesManager
         self.callType = callType
         /* <CUSTOM_COLOR_FEATURE> */
@@ -123,7 +127,6 @@ class CompositeViewModelFactory: CompositeViewModelFactoryProtocol {
     func getCallingViewModel(rendererViewManager: RendererViewManager) -> CallingViewModel {
         guard let viewModel = self.callingViewModel else {
             
-            let captionsOptions = CaptionsOptions(captionsOn:true, spokenLanguage: "en-us", captionLanguage: "ja-JP")
             let viewModel = CallingViewModel(compositeViewModelFactory: self,
                                              store: store,
                                              localizationProvider: localizationProvider,
@@ -132,7 +135,7 @@ class CompositeViewModelFactory: CompositeViewModelFactoryProtocol {
                                              allowLocalCameraPreview: localOptions?.audioVideoMode
                                                 != CallCompositeAudioVideoMode.audioOnly,
                                              callType: callType,
-                                             captionsOptions: captionsOptions,
+                                             captionsOptions: captionsOptions ?? CaptionsOptions(),
                                              capabilitiesManager: self.capabilitiesManager,
                                              callScreenOptions: callScreenOptions ?? CallScreenOptions(),
                                              rendererViewManager: rendererViewManager)

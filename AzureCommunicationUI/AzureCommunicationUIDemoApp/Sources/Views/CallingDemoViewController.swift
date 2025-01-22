@@ -123,8 +123,13 @@ class CallingDemoViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         registerNotifications()
+
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         guard !userIsEditing else {
@@ -454,7 +459,7 @@ class CallingDemoViewController: UIViewController {
 
         let callScreenOptions = createCallScreenOptions(callComposite: callComposite)
         
-        let captionsOptions = CaptionsOptions(captionsOn: false, spokenLanguage: "en-us", captionLanguage: "ja-JP")
+        let captionsOptions = CaptionsOptions(captionsOn: true, spokenLanguage: "en-us", captionLanguage: "ja-JP")
         
         return LocalOptions(participantViewData: participantViewData,
                                         setupScreenViewData: setupScreenViewData,
@@ -579,6 +584,7 @@ class CallingDemoViewController: UIViewController {
     }
 
     private func startExperience(with link: String) async {
+        
         if let callComposite = try? await createCallComposite() {
             var remoteInfoDisplayName = envConfigSubject.callkitRemoteInfo
             if remoteInfoDisplayName.isEmpty {

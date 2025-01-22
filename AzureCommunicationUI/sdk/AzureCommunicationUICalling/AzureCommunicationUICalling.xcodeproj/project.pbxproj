@@ -333,6 +333,7 @@
 		BD3CC699283D952E0052DE4A /* OverlayViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CC698283D952E0052DE4A /* OverlayViewModelProtocol.swift */; };
 		BD3CC69B283D953E0052DE4A /* OnHoldOverlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CC69A283D953E0052DE4A /* OnHoldOverlayViewModel.swift */; };
 		BD58AFBF2D3F4431006DE639 /* TranslatorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD58AFBE2D3F4431006DE639 /* TranslatorUtil.swift */; };
+		BD58AFD52D410209006DE639 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD58AFD42D410202006DE639 /* AlertUtil.swift */; };
 		BD750B902D35C76300C014CB /* RawOutgoingAudioSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD750B8F2D35C75C00C014CB /* RawOutgoingAudioSender.swift */; };
 		C868F7732C5AEE1800D242B4 /* CallScreenHeaderViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868F7722C5AEE1800D242B4 /* CallScreenHeaderViewData.swift */; };
 		C89FCE602C0FAF5D00983444 /* CapabilitiesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89FCE5F2C0FAF5D00983444 /* CapabilitiesManager.swift */; };
@@ -762,6 +763,7 @@
 		BD3CC698283D952E0052DE4A /* OverlayViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayViewModelProtocol.swift; sourceTree = "<group>"; };
 		BD3CC69A283D953E0052DE4A /* OnHoldOverlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnHoldOverlayViewModel.swift; sourceTree = "<group>"; };
 		BD58AFBE2D3F4431006DE639 /* TranslatorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorUtil.swift; sourceTree = "<group>"; };
+		BD58AFD42D410202006DE639 /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		BD750B8F2D35C75C00C014CB /* RawOutgoingAudioSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawOutgoingAudioSender.swift; sourceTree = "<group>"; };
 		C580DBF67D8B5AEF7A801F90 /* Pods_AzureCommunicationUICalling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AzureCommunicationUICalling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C868F7722C5AEE1800D242B4 /* CallScreenHeaderViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallScreenHeaderViewData.swift; sourceTree = "<group>"; };
@@ -1142,6 +1144,7 @@
 		1F6470AA2639FE560008B9E9 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				BD58AFD42D410202006DE639 /* AlertUtil.swift */,
 				BD58AFBE2D3F4431006DE639 /* TranslatorUtil.swift */,
 				50B6AC7E28208C750077FC01 /* AccessibilityIdentifier.swift */,
 				1FE1BE7E26FE38C9000A8D18 /* CallCompositeInternalError.swift */,
@@ -2271,6 +2274,7 @@
 				A3EEF32A2C1931ED008B81B3 /* CaptionsViewManager.swift in Sources */,
 				1F4B0EFE26A1466D00E87014 /* ParticipantGridCellView.swift in Sources */,
 				116BC0C62C24D15800F8CF6F /* CaptionsInfoView.swift in Sources */,
+				BD58AFD52D410209006DE639 /* AlertUtil.swift in Sources */,
 				1FBCB6D92655825200F57EEA /* LocalUserReducer.swift in Sources */,
 				A874EDC826616792003C7D92 /* LifecycleAction.swift in Sources */,
 				1BAD44BE28404D1800C9E6A9 /* OrientationManager.swift in Sources */,

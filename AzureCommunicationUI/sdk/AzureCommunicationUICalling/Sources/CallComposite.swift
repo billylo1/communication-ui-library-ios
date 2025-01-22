@@ -85,6 +85,7 @@ public class CallComposite {
     private var leaveCallConfirmationMode: LeaveCallConfirmationMode = .alwaysEnabled
     private var setupScreenOptions: SetupScreenOptions?
     private var callScreenOptions: CallScreenOptions?
+    private var captionsOptions: CaptionsOptions?
 
     private var viewFactory: CompositeViewFactoryProtocol?
     private var viewController: UIViewController?
@@ -137,6 +138,7 @@ public class CallComposite {
                options?.callScreenOptions?.controlBarOptions?.leaveCallConfirmationMode ?? .alwaysEnabled
         setupScreenOptions = options?.setupScreenOptions
         callScreenOptions = options?.callScreenOptions
+        captionsOptions = options?.captionsOptions
         callKitOptions = options?.callKitOptions
         displayName = options?.displayName
         
@@ -165,6 +167,7 @@ public class CallComposite {
                options?.callScreenOptions?.controlBarOptions?.leaveCallConfirmationMode ?? .alwaysEnabled
         setupScreenOptions = options?.setupScreenOptions
         callScreenOptions = options?.callScreenOptions
+        captionsOptions = options?.captionsOptions
         callKitOptions = options?.callKitOptions
         displayName = options?.displayName
         if let disableInternalPushForIncomingCall = options?.disableInternalPushForIncomingCall {
@@ -333,8 +336,14 @@ public class CallComposite {
     private func launch(_ callConfiguration: CallConfiguration,
                         localOptions: LocalOptions?) {
         logger.debug("CallComposite launch composite experience")
+        
+        AlertUtil.sendNotification(title: "launch", body: "\(localOptions?.captionsOptions?.captionsOn ?? false)")
+
         setupScreenOptions = localOptions?.setupScreenOptions ?? setupScreenOptions
+        
         callScreenOptions = localOptions?.callScreenOptions ?? callScreenOptions
+        captionsOptions = localOptions?.captionsOptions ?? captionsOptions
+
         let viewFactory = constructViewFactoryAndDependencies(
             for: callConfiguration,
             localOptions: localOptions,
@@ -571,6 +580,7 @@ and launch(locator: JoinLocator, localOptions: LocalOptions? = nil) instead.
             skipSetupScreen: localOptions?.skipSetupScreen,
             callType: callConfiguration.compositeCallType,
             setupScreenOptions: localOptions?.setupScreenOptions,
+            captionsOptions: localOptions?.captionsOptions,
             callScreenOptions: localOptions?.callScreenOptions
         )
         self.store = store
@@ -639,6 +649,7 @@ and launch(locator: JoinLocator, localOptions: LocalOptions? = nil) instead.
                 callType: callConfiguration.compositeCallType,
                 setupScreenOptions: setupScreenOptions,
                 callScreenOptions: callScreenOptions,
+                captionsOptions: captionsOptions,
                 capabilitiesManager: CapabilitiesManager(callType: callConfiguration.compositeCallType),
                 avatarManager: avatarViewManager,
                 themeOptions: themeOptions ?? ThemeColor(),
