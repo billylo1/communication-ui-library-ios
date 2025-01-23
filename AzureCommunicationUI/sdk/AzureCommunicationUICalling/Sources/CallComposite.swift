@@ -613,7 +613,8 @@ and launch(locator: JoinLocator, localOptions: LocalOptions? = nil) instead.
 
         let captionsViewManager = CaptionsViewManager(
             store: store,
-            callingSDKWrapper: callingSdkWrapper
+            callingSDKWrapper: callingSdkWrapper,
+            callCompositeEventsHandler: callCompositeEventsHandler
         )
         return CompositeViewFactory(
             logger: logger,
