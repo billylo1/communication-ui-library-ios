@@ -36,7 +36,7 @@ public struct CallCompositeCaptionsData: Identifiable, Equatable {
     /// to make CallCompositeCaptionsData to be identifiable
     public var id: Date { timestamp }       // changed
 
-    var resultType: CaptionsResultType
+    public var resultType: CaptionsResultType
     let speakerRawId: String
     let speakerName: String
     let spokenLanguage: String
