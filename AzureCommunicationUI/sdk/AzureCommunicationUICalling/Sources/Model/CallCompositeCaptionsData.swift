@@ -11,7 +11,7 @@ enum CallCompositeCaptionsType: Int {
     case communication
     case teams
 }
-enum CaptionsResultType {
+public enum CaptionsResultType {
     case final
     case partial
 }
