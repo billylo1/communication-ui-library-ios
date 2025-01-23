@@ -31,9 +31,10 @@ enum CallCompositeCaptionsErrorsDescription: String {
     case captionsNotActive = " Captions are not active"
 }
 
-struct CallCompositeCaptionsData: Identifiable, Equatable {
+// changed to public
+public struct CallCompositeCaptionsData: Identifiable, Equatable {
     /// to make CallCompositeCaptionsData to be identifiable
-    var id: Date { timestamp }
+    public var id: Date { timestamp }       // changed
 
     var resultType: CaptionsResultType
     let speakerRawId: String
@@ -44,7 +45,7 @@ struct CallCompositeCaptionsData: Identifiable, Equatable {
     let captionLanguage: String?
     let captionText: String?
 
-    static func == (lhs: CallCompositeCaptionsData, rhs: CallCompositeCaptionsData) -> Bool {
+    public static func == (lhs: CallCompositeCaptionsData, rhs: CallCompositeCaptionsData) -> Bool {        // changed
         // Define what makes two instances of CallCompositeCaptionsData equal
         return lhs.speakerRawId == rhs.speakerRawId &&
                lhs.resultType == rhs.resultType &&

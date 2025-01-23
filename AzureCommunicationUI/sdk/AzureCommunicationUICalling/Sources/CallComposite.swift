@@ -31,6 +31,8 @@ public class CallComposite {
         public var onPictureInPictureChanged: ((_ isPictureInPicture: Bool) -> Void)?
         /// Closure to execute when call state changes.
         public var onCallStateChanged: ((CallState) -> Void)?
+        /// Closure to execute when captions received
+        public var onCaptionsDataReceived: ((CallCompositeCaptionsData) -> Void)?
         /// Closure to Call Composite dismissed.
         public var onDismissed: ((CallCompositeDismissed) -> Void)?
         /// Closure to execute when the User reports an issue from within the call composite
