@@ -125,6 +125,10 @@ class CallingDemoViewController: UIViewController {
         registerNotifications()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateStartExperieceButton()
+    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         guard !userIsEditing else {
@@ -1106,12 +1110,13 @@ class CallingDemoViewController: UIViewController {
         roomCallTextField.addTarget(self, action: #selector(textFieldEditingDidChange), for: .editingChanged)
 
         meetingTypeSegmentedControl = UISegmentedControl(items: ["Group Call", "Teams Meeting", "1:N", "Room Call"])
-        meetingTypeSegmentedControl.selectedSegmentIndex = envConfigSubject.selectedMeetingType.rawValue
+        meetingTypeSegmentedControl.selectedSegmentIndex = 3
         meetingTypeSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
         meetingTypeSegmentedControl.addTarget(self,
                                               action: #selector(onMeetingTypeValueChanged(_:)),
                                               for: .valueChanged)
-        selectedMeetingType = envConfigSubject.selectedMeetingType
+        selectedMeetingType = .roomCall
+        onMeetingTypeValueChanged(meetingTypeSegmentedControl)
         settingsButton = UIButton()
         settingsButton.setTitle("Settings", for: .normal)
         settingsButton.backgroundColor = .systemBlue
