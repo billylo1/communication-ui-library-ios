@@ -30,7 +30,7 @@ class CallingDemoViewController: UIViewController {
     private var selectedAcsTokenType: ACSTokenType = .token
     private var acsTokenUrlTextField: UITextField!
     private var acsTokenTextField: UITextField!
-    private var selectedMeetingType: MeetingType = .roomCall
+    private var selectedMeetingType: MeetingType = .groupCall
     private var displayNameTextField: UITextField!
     private var userIdTextField: UITextField!
     private var groupCallTextField: UITextField!
@@ -123,13 +123,12 @@ class CallingDemoViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         registerNotifications()
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateStartExperieceButton()
     }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         guard !userIsEditing else {
@@ -300,7 +299,6 @@ class CallingDemoViewController: UIViewController {
             subscribeToEvents(callComposite: callComposite)
             GlobalCompositeManager.callComposite = callComposite
             self.envConfigSubject.saveFromState()
-            callComposite.events.captionLanguage = "ja-JP"
             return callComposite
         }
         return nil
@@ -366,18 +364,6 @@ class CallingDemoViewController: UIViewController {
             self.onCallStateChanged(callStateEvent,
                     callComposite: composite)
         }
-        
-        let onCaptionsReceivedHandler: (CallCompositeCaptionsData) -> Void = { [weak callComposite] captionData in
-            guard let composite = callComposite else {
-                return
-            }
-            let data = captionData.spokenText
-            print("onCaptionsReceivedHandler trigger \(captionData.spokenText) \(captionData.captionText ?? "")")
-
-        }
-
-        
-        
         let onDismissedHandler: (CallCompositeDismissed) -> Void = { [] _ in
             if self.envConfigSubject.useRelaunchOnDismissedToggle && self.exitCompositeExecuted {
                             DispatchQueue.main.async {
@@ -423,15 +409,12 @@ class CallingDemoViewController: UIViewController {
         callComposite.events.onRemoteParticipantJoined = onRemoteParticipantJoinedHandler
         callComposite.events.onError = onErrorHandler
         callComposite.events.onCallStateChanged = onCallStateChangedHandler
-        callComposite.events.onCaptionsReceived = onCaptionsReceivedHandler         // added
         callComposite.events.onDismissed = onDismissedHandler
         callComposite.events.onPictureInPictureChanged = onPipChangedHandler
         callComposite.events.onUserReportedIssue = onUserReportedIssueHandler
         callComposite.events.onIncomingCallAcceptedFromCallKit = callKitCallAccepted
         callComposite.events.onIncomingCall = onIncomingCall
         callComposite.events.onIncomingCallCancelled = onIncomingCallCancelled
-        
-        
     }
 
     func getLocalOptions(_ callComposite: CallComposite?) -> LocalOptions {
@@ -458,9 +441,6 @@ class CallingDemoViewController: UIViewController {
                                                     audioDeviceButton: audioDeviceButton)
 
         let callScreenOptions = createCallScreenOptions(callComposite: callComposite)
-        
-        let captionsOptions = CaptionsOptions(captionsOn: true, spokenLanguage: "en-us", captionLanguage: "ja-JP")
-        
         return LocalOptions(participantViewData: participantViewData,
                                         setupScreenViewData: setupScreenViewData,
                                         cameraOn: envConfigSubject.cameraOn,
@@ -468,7 +448,6 @@ class CallingDemoViewController: UIViewController {
                                         skipSetupScreen: envConfigSubject.skipSetupScreen,
                                         audioVideoMode: envConfigSubject.audioOnly ? .audioOnly : .audioAndVideo,
                             setupScreenOptions: setupScreenOptions,
-                            captionsOptions: captionsOptions,
                             callScreenOptions: callScreenOptions
         )
     }
@@ -584,7 +563,6 @@ class CallingDemoViewController: UIViewController {
     }
 
     private func startExperience(with link: String) async {
-        
         if let callComposite = try? await createCallComposite() {
             var remoteInfoDisplayName = envConfigSubject.callkitRemoteInfo
             if remoteInfoDisplayName.isEmpty {
@@ -597,7 +575,7 @@ class CallingDemoViewController: UIViewController {
             if envConfigSubject.useDeprecatedLaunch {
                 await startCallWithDeprecatedLaunch()
             } else {
-                var localOptions = getLocalOptions(callComposite)
+                let localOptions = getLocalOptions(callComposite)
                 switch selectedMeetingType {
                 case .groupCall:
                     let uuid = UUID(uuidString: link) ?? UUID()
@@ -959,7 +937,7 @@ class CallingDemoViewController: UIViewController {
     }
 
     private func updateStartExperieceButton() {
-        if !startExperienceButton.isEnabled {
+        if isStartExperienceDisabled {
             startExperienceButton.backgroundColor = .systemGray3
         } else {
             startExperienceButton.backgroundColor = .systemBlue
@@ -1131,14 +1109,14 @@ class CallingDemoViewController: UIViewController {
         roomCallTextField.borderStyle = .roundedRect
         roomCallTextField.addTarget(self, action: #selector(textFieldEditingDidChange), for: .editingChanged)
 
-        selectedMeetingType = .roomCall
         meetingTypeSegmentedControl = UISegmentedControl(items: ["Group Call", "Teams Meeting", "1:N", "Room Call"])
         meetingTypeSegmentedControl.selectedSegmentIndex = 3
         meetingTypeSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
         meetingTypeSegmentedControl.addTarget(self,
                                               action: #selector(onMeetingTypeValueChanged(_:)),
                                               for: .valueChanged)
-        
+        selectedMeetingType = .roomCall
+        onMeetingTypeValueChanged(meetingTypeSegmentedControl)
         settingsButton = UIButton()
         settingsButton.setTitle("Settings", for: .normal)
         settingsButton.backgroundColor = .systemBlue
@@ -1412,7 +1390,6 @@ class CallingDemoViewController: UIViewController {
         updateAcsTokenTypeFields()
         updateMeetingTypeFields()
         startExperienceButton.isEnabled = !isStartExperienceDisabled
-        startExperienceButton.isEnabled = true
         updateStartExperieceButton()
         self.acceptCallButton.isHidden = true
         self.declineCallButton.isHidden = true

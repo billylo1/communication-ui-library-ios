@@ -22,10 +22,6 @@ class CallingSDKWrapper: NSObject, CallingSDKWrapperProtocol {
     private var newVideoDeviceAddedHandler: ((VideoDeviceInfo) -> Void)?
     private var callKitRemoteInfo: CallKitRemoteInfo?
     private var callingSDKInitializer: CallingSDKInitializer
-    private var rawOutgoingAudioStream: RawOutgoingAudioStream?
-    private var delegateImplementer: DelegateImplementer?
-    private var rawOutgoingAudioSender: RawOutgoingAudioSender?
-    var rawIncomingAudioStream: RawIncomingAudioStream?
 
     init(logger: Logger,
          callingEventsHandler: CallingSDKEventsHandling,
@@ -93,27 +89,7 @@ class CallingSDKWrapper: NSObject, CallingSDKWrapperProtocol {
         }
 
         joinCallOptions.outgoingAudioOptions = OutgoingAudioOptions()
-        // joinCallOptions.outgoingAudioOptions?.muted = !isAudioPreferred
-//        let outgoingAudioStreamOptions = RawOutgoingAudioStreamOptions()
-//        let propertiesOut = RawOutgoingAudioStreamProperties()
-//        propertiesOut.sampleRate = .hz44100
-//        propertiesOut.bufferDuration = .ms10
-//        propertiesOut.channelMode = .mono
-//        propertiesOut.format = .pcm16Bit
-//        outgoingAudioStreamOptions.properties = propertiesOut
-//
-//        self.rawOutgoingAudioStream = RawOutgoingAudioStream(options: outgoingAudioStreamOptions)
-//        
-//        self.delegateImplementer = DelegateImplementer()
-//        self.delegateImplementer?.rawOutgoingAudioSender = RawOutgoingAudioSender(
-//            stream: self.rawOutgoingAudioStream!,
-//            options: outgoingAudioStreamOptions,
-//            producer: ToneSampleProducer())
-//        
-//        self.rawOutgoingAudioStream?.delegate = self.delegateImplementer
-//
-//        joinCallOptions.outgoingAudioOptions?.stream = self.rawOutgoingAudioStream
-
+        joinCallOptions.outgoingAudioOptions?.muted = !isAudioPreferred
         joinCallOptions.incomingVideoOptions = incomingVideoOptions
         if let remoteInfo = callKitRemoteInfo {
             let callKitRemoteInfo = AzureCommunicationCalling.CallKitRemoteInfo()
@@ -140,31 +116,6 @@ class CallingSDKWrapper: NSObject, CallingSDKWrapperProtocol {
             logger.error("Invalid groupID / meeting link")
             throw CallCompositeInternalError.callJoinFailed
         }
-
-//        let audioStreamOptions = RawIncomingAudioStreamOptions()
-//        let properties = RawIncomingAudioStreamProperties()
-//        properties.format = .pcm16Bit
-//        properties.sampleRate = .hz44100
-//        properties.channelMode = .stereo
-//        audioStreamOptions.properties = properties
-//        let incomingAudioOptions = IncomingAudioOptions()
-//        self.rawIncomingAudioStream = RawIncomingAudioStream(options: audioStreamOptions)
-//        incomingAudioOptions.stream = self.rawIncomingAudioStream
-//        joinCallOptions.incomingAudioOptions = incomingAudioOptions
-//        self.rawIncomingAudioStream?.events.onMixedAudioBufferReceived = { args in
-//            // Receive raw audio buffers(AVAudioPCMBuffer) and process them using AVAudioEngine API's.
-//            guard let audioBuffer = args.audioBuffer.buffer as? AVAudioPCMBuffer else {
-//                print("No audio data received")
-//                return
-//            }
-//            // Process audioBuffer
-//            print("RA frameLength \(audioBuffer.frameLength)")
-//            print("RA frameCapacity \(audioBuffer.frameCapacity)")
-//            print("RA format \(audioBuffer.format)")
-//        }
-//        self.rawIncomingAudioStream?.events.onStateChanged = { _ in
-//            // To be notified when stream started and stopped.
-//        }
 
         do {
             let callAgent = try await callingSDKInitializer.setupCallAgent()

@@ -16,7 +16,6 @@ public struct CallCompositeOptions {
     private(set) var setupScreenOrientation: OrientationOptions?
     private(set) var callingScreenOrientation: OrientationOptions?
     private(set) var callScreenOptions: CallScreenOptions?
-    private(set) var captionsOptions: CaptionsOptions?
     private(set) var capabilitiesChangedNotificationMode: CapabilitiesChangedNotificationMode?
     private(set) var callKitOptions: CallKitOptions?
     private(set) var disableInternalPushForIncomingCall = false
@@ -49,7 +48,6 @@ public struct CallCompositeOptions {
                 enableMultitasking: Bool = false,
                 enableSystemPictureInPictureWhenMultitasking: Bool = false,
                 callScreenOptions: CallScreenOptions? = nil,
-                captionsOptions: CaptionsOptions? = nil,
                 callKitOptions: CallKitOptions? = nil,
                 displayName: String? = nil,
                 disableInternalPushForIncomingCall: Bool = false,
@@ -64,7 +62,6 @@ public struct CallCompositeOptions {
         self.enableMultitasking = enableMultitasking
         self.enableSystemPipWhenMultitasking = enableSystemPictureInPictureWhenMultitasking
         self.callScreenOptions = callScreenOptions
-        self.captionsOptions = captionsOptions
         self.capabilitiesChangedNotificationMode = capabilitiesChangedNotificationMode
         self.callKitOptions = callKitOptions
         self.displayName = displayName
@@ -110,7 +107,6 @@ public struct CallCompositeOptions {
         self.enableMultitasking = enableMultitasking
         self.enableSystemPipWhenMultitasking = enableSystemPictureInPictureWhenMultitasking
         self.callScreenOptions = nil
-        self.captionsOptions = nil
         self.capabilitiesChangedNotificationMode = capabilitiesChangedNotificationMode
         self.callKitOptions = callKitOptions
         self.displayName = displayName

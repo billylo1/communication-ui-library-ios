@@ -552,16 +552,6 @@ extension CallingDemoView {
             onCallStateChanged(callStateEvent,
                     callComposite: composite)
         }
-
-        let onCaptionsReceivedHandler: (CallCompositeCaptionsData) -> Void = { [weak callComposite] onCaptionsReceivedHandler in
-            guard let composite = callComposite else {
-                return
-            }
-
-            print("onCaptionsReceivedHandler trigger")
-
-        }
-
         let onDismissedHandler: (CallCompositeDismissed) -> Void = { [] _ in
             if envConfigSubject.useRelaunchOnDismissedToggle && exitCompositeExecuted {
                 relaunchComposite()
@@ -617,7 +607,6 @@ extension CallingDemoView {
         callComposite.events.onRemoteParticipantJoined = onRemoteParticipantJoinedHandler
         callComposite.events.onError = onErrorHandler
         callComposite.events.onCallStateChanged = onCallStateChangedHandler
-        callComposite.events.onCaptionsReceived = onCaptionsReceivedHandler
         callComposite.events.onDismissed = onDismissedHandler
         callComposite.events.onPictureInPictureChanged = onPipChangedHandler
         callComposite.events.onUserReportedIssue = onUserReportedIssueHandler
@@ -663,6 +652,7 @@ extension CallingDemoView {
                             microphoneOn: envConfigSubject.microphoneOn,
                             skipSetupScreen: envConfigSubject.skipSetupScreen,
                             audioVideoMode: envConfigSubject.audioOnly ? .audioOnly : .audioAndVideo,
+                            captionsOptions: captionsOptions,
                             setupScreenOptions: setupScreenOptions,
                             callScreenOptions: callScreenOptions
         )

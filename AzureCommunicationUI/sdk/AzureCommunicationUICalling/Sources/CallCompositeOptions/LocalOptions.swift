@@ -13,13 +13,14 @@ public struct LocalOptions {
 
     /// Configuration for the call setup screen, including titles and subtitles.
     let setupScreenViewData: SetupScreenViewData?
+    /// Configuration for captions
+    let captionsOptions: CaptionsOptions?
 
     ///  The CameraOn is used when we skip the setup screen
 
     /// Determines if the microphone is enabled upon joining the call, bypassing the setup screen.
     let microphoneOn: Bool?
-    let captionsOptions: CaptionsOptions?
-    
+
     /// Indicates whether to skip the setup screen and use default or specified settings.
     let skipSetupScreen: Bool?
 
@@ -40,6 +41,7 @@ public struct LocalOptions {
     ///   - microphoneOn: Determines if the microphone is enabled by default.
     ///   - skipSetupScreen: Indicates whether to bypass the setup screen.
     ///   - audioVideoMode: The desired audio/video mode for the call.
+    ///   - captionsOptions: Configuration for captions
     ///   - setupScreenOptions: Configuration for setup screen
     ///   - callScreenOptions: Configuration for calling screen
     public init(participantViewData: ParticipantViewData? = nil,
@@ -48,8 +50,8 @@ public struct LocalOptions {
                 microphoneOn: Bool? = false,
                 skipSetupScreen: Bool? = false,
                 audioVideoMode: CallCompositeAudioVideoMode = .audioAndVideo,
-                setupScreenOptions: SetupScreenOptions? = nil,
                 captionsOptions: CaptionsOptions? = nil,
+                setupScreenOptions: SetupScreenOptions? = nil,
                 callScreenOptions: CallScreenOptions? = nil) {
         self.participantViewData = participantViewData
         self.setupScreenViewData = setupScreenViewData
@@ -57,9 +59,9 @@ public struct LocalOptions {
         self.microphoneOn = microphoneOn
         self.skipSetupScreen = skipSetupScreen
         self.audioVideoMode = audioVideoMode
+        self.captionsOptions = captionsOptions
         self.setupScreenOptions = setupScreenOptions
         self.callScreenOptions = callScreenOptions
-        self.captionsOptions = captionsOptions
     }
 
     /// Determines the actual state of the camera

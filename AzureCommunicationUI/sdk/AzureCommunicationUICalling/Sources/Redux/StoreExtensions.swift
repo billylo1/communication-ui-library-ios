@@ -19,7 +19,6 @@ extension Store where State == AppState, Action == AzureCommunicationUICalling.A
         skipSetupScreen: Bool?,
         callType: CompositeCallType,
         setupScreenOptions: SetupScreenOptions? = nil,
-        captionsOptions: CaptionsOptions? = nil,
         callScreenOptions: CallScreenOptions? = nil
     ) -> Store<AppState, Action> {
 

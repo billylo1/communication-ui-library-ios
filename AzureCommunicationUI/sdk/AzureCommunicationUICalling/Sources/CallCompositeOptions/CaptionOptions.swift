@@ -8,11 +8,9 @@ import Foundation
 public struct CaptionsOptions {
     let captionsOn: Bool
     let spokenLanguage: String?
-    let captionLanguage: String?
 
-    public init(captionsOn: Bool = false, spokenLanguage: String? = nil, captionLanguage: String? = nil) {
+    public init(captionsOn: Bool = false, spokenLanguage: String? = nil) {
         self.spokenLanguage = spokenLanguage
         self.captionsOn = captionsOn
-        self.captionLanguage = captionLanguage
     }
 }

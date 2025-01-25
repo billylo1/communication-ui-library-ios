@@ -2,10 +2,10 @@ Pod::Spec.new do |spec|
   spec.name                 = "AzureCommunicationUICalling"
   spec.version              = "1.13.1"
   spec.summary              = "UI Library to quickly integrate Azure Communication Calling Services experiences into your applications."
-  spec.homepage             = "https://github.com/Azure/communication-ui-library-ios"
+  spec.homepage             = "https://github.com/billylo1/communication-ui-library-ios"
   spec.license              = { :type => 'MIT' }
   spec.author               = 'Microsoft'
-  spec.source               = { :git => 'https://github.com/billylo1/communication-ui-library-ios.git', :commit => 'd89437448d22949a697e4495606c09cc9232e218' }
+  spec.source               = { :git => 'https://github.com/billylo1/communication-ui-library-ios.git', :commit => 'c196dabcaca63fc0aca325f051ea6007470751c1' }
   spec.module_name          = 'AzureCommunicationUICalling'
   spec.swift_version        = '5.8'
 

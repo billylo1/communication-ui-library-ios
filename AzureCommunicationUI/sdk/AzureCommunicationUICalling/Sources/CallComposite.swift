@@ -4,7 +4,9 @@
 //
 
 import AzureCommunicationCommon
+/* <SDK_CX_PROVIDER_SUPPORT>
 import AzureCommunicationCalling
+</SDK_CX_PROVIDER_SUPPORT> */
 
 import UIKit
 import SwiftUI
@@ -22,7 +24,6 @@ public class CallComposite {
     /// The class to configure events closures for Call Composite.
     public class Events {
         /// Closure to execute when error event occurs inside Call Composite.
-        public var captionLanguage : String?                                       // added
         public var onError: ((CallCompositeError) -> Void)?
         /// Closures to execute when participant has joined a call inside Call Composite.
         public var onRemoteParticipantJoined: (([CommunicationIdentifier]) -> Void)?
@@ -30,8 +31,8 @@ public class CallComposite {
         public var onPictureInPictureChanged: ((_ isPictureInPicture: Bool) -> Void)?
         /// Closure to execute when call state changes.
         public var onCallStateChanged: ((CallState) -> Void)?
-        /// Closure to Call Composite dismissed.
-        var onCaptionsReceived: ((CallCompositeCaptionsData) -> Void)?                  // added
+        /// Closure to execute when captions received
+        public var onCaptionsDataReceived: ((CallCompositeCaptionsData) -> Void)?
         /// Closure to Call Composite dismissed.
         public var onDismissed: ((CallCompositeDismissed) -> Void)?
         /// Closure to execute when the User reports an issue from within the call composite
@@ -85,7 +86,6 @@ public class CallComposite {
     private var leaveCallConfirmationMode: LeaveCallConfirmationMode = .alwaysEnabled
     private var setupScreenOptions: SetupScreenOptions?
     private var callScreenOptions: CallScreenOptions?
-    private var captionsOptions: CaptionsOptions?
 
     private var viewFactory: CompositeViewFactoryProtocol?
     private var viewController: UIViewController?
@@ -138,10 +138,8 @@ public class CallComposite {
                options?.callScreenOptions?.controlBarOptions?.leaveCallConfirmationMode ?? .alwaysEnabled
         setupScreenOptions = options?.setupScreenOptions
         callScreenOptions = options?.callScreenOptions
-        captionsOptions = options?.captionsOptions
         callKitOptions = options?.callKitOptions
         displayName = options?.displayName
-        
         if let disableInternalPushForIncomingCall = options?.disableInternalPushForIncomingCall {
             self.disableInternalPushForIncomingCall = disableInternalPushForIncomingCall
         }
@@ -167,7 +165,6 @@ public class CallComposite {
                options?.callScreenOptions?.controlBarOptions?.leaveCallConfirmationMode ?? .alwaysEnabled
         setupScreenOptions = options?.setupScreenOptions
         callScreenOptions = options?.callScreenOptions
-        captionsOptions = options?.captionsOptions
         callKitOptions = options?.callKitOptions
         displayName = options?.displayName
         if let disableInternalPushForIncomingCall = options?.disableInternalPushForIncomingCall {
@@ -336,14 +333,8 @@ public class CallComposite {
     private func launch(_ callConfiguration: CallConfiguration,
                         localOptions: LocalOptions?) {
         logger.debug("CallComposite launch composite experience")
-        
-        AlertUtil.sendNotification(title: "launch", body: "\(localOptions?.captionsOptions?.captionsOn ?? false)")
-
         setupScreenOptions = localOptions?.setupScreenOptions ?? setupScreenOptions
-        
         callScreenOptions = localOptions?.callScreenOptions ?? callScreenOptions
-        captionsOptions = localOptions?.captionsOptions ?? captionsOptions
-
         let viewFactory = constructViewFactoryAndDependencies(
             for: callConfiguration,
             localOptions: localOptions,
@@ -570,17 +561,15 @@ and launch(locator: JoinLocator, localOptions: LocalOptions? = nil) instead.
             callingSDKInitializer: getCallingSDKInitializer())
         self.callingSDKWrapper = callingSdkWrapper
 
-        let callingService = CallingService(logger: logger, callingSDKWrapper: callingSdkWrapper)   // modified so we can set caption language
         let store = Store.constructStore(
             logger: logger,
-            callingService: callingService,
+            callingService: CallingService(logger: logger, callingSDKWrapper: callingSdkWrapper),
             displayName: localOptions?.participantViewData?.displayName ?? displayName,
             startWithCameraOn: localOptions?.cameraOn,
             startWithMicrophoneOn: localOptions?.microphoneOn,
             skipSetupScreen: localOptions?.skipSetupScreen,
             callType: callConfiguration.compositeCallType,
             setupScreenOptions: localOptions?.setupScreenOptions,
-            captionsOptions: localOptions?.captionsOptions,
             callScreenOptions: localOptions?.callScreenOptions
         )
         self.store = store
@@ -627,7 +616,6 @@ and launch(locator: JoinLocator, localOptions: LocalOptions? = nil) instead.
             callingSDKWrapper: callingSdkWrapper,
             callCompositeEventsHandler: callCompositeEventsHandler
         )
-        
         return CompositeViewFactory(
             logger: logger,
             avatarManager: avatarViewManager,
@@ -649,7 +637,6 @@ and launch(locator: JoinLocator, localOptions: LocalOptions? = nil) instead.
                 callType: callConfiguration.compositeCallType,
                 setupScreenOptions: setupScreenOptions,
                 callScreenOptions: callScreenOptions,
-                captionsOptions: captionsOptions,
                 capabilitiesManager: CapabilitiesManager(callType: callConfiguration.compositeCallType),
                 avatarManager: avatarViewManager,
                 themeOptions: themeOptions ?? ThemeColor(),
